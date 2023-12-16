@@ -2,7 +2,10 @@
   "name": "@dnd-ua/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "start:server": "nx serve dnd-ua-api", 
+    "start:client": "nx serve dnd-ua-client"
+  },
   "private": true,
   "devDependencies": {
     "@angular-devkit/build-angular": "~17.0.0",
