@@ -1,0 +1,53 @@
+{
+  "name": "dnd-ua-api",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "dnd-ua-api/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/dnd-ua-api",
+        "main": "dnd-ua-api/src/main.ts",
+        "tsConfig": "dnd-ua-api/tsconfig.app.json",
+        "assets": ["dnd-ua-api/src/assets"],
+        "webpackConfig": "dnd-ua-api/webpack.config.js"
+      },
+      "configurations": {
+        "development": {},
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "dnd-ua-api:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "dnd-ua-api:build:development"
+        },
+        "production": {
+          "buildTarget": "dnd-ua-api:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "dnd-ua-api/jest.config.ts"
+      }
+    }
+  },
+  "tags": []
+}

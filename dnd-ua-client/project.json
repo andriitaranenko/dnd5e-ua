@@ -1,0 +1,80 @@
+{
+  "name": "dnd-ua-client",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "dnd-ua",
+  "sourceRoot": "dnd-ua-client/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/dnd-ua-client",
+        "index": "dnd-ua-client/src/index.html",
+        "main": "dnd-ua-client/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "dnd-ua-client/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": ["dnd-ua-client/src/favicon.ico", "dnd-ua-client/src/assets"],
+        "styles": ["dnd-ua-client/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "dnd-ua-client:build:production"
+        },
+        "development": {
+          "buildTarget": "dnd-ua-client:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "dnd-ua-client:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "dnd-ua-client/jest.config.ts"
+      }
+    }
+  }
+}
