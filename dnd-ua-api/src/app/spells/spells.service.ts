@@ -1,9 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { CreateSpellDto } from './dto/create-spell.dto';
 import { UpdateSpellDto } from './dto/update-spell.dto';
-import { EntityManager, Repository } from 'typeorm';
+import { Brackets, EntityManager, Repository } from 'typeorm';
 import { Spell } from './entities/spell.entity';
 import { InjectRepository } from '@nestjs/typeorm';
+import { FindSpellsDto } from './dto/find-spells.dto';
 
 @Injectable()
 export class SpellsService {
@@ -19,7 +20,28 @@ export class SpellsService {
   }
 
   async findAll() {
-    return this.spellsRepository.find()
+    return this.spellsRepository.find();
+  }
+
+  async findMany(findSpellsDto: FindSpellsDto) {
+    const { originalName, translatedName, level, search } = findSpellsDto;
+
+    const queryBuilder = this.spellsRepository.createQueryBuilder('spell');
+
+    originalName && queryBuilder.andWhere('spell.originalName = :originalName', { originalName });
+    translatedName && queryBuilder.andWhere('spell.translatedName = :translatedName', { translatedName });
+    level && queryBuilder.andWhere('spell.level = :level', { level });
+
+    if (search) {
+      queryBuilder.andWhere(new Brackets(queryBuilder => {
+        queryBuilder.where('LOWER(spell.originalName) LIKE LOWER(:search)', { search: `%${search}%`})
+          .orWhere('LOWER(spell.translatedName) LIKE LOWER(:search)', { search: `%${search}%`})
+      }))
+    }
+
+    return queryBuilder
+      .select(['spell'])
+      .getMany();
   }
 
   async findOne(id: number) {
@@ -27,9 +49,7 @@ export class SpellsService {
   }
 
   async update(id: number, updateSpellDto: UpdateSpellDto) {
-    const spell = await this.spellsRepository.findOneBy({ id });
-    spell.description = updateSpellDto.description;
-    await this.entityManager.save(spell);
+    await this.spellsRepository.update({ id }, { ...updateSpellDto })
   }
 
   async remove(id: number) {
