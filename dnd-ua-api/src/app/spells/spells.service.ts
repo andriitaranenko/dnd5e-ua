@@ -1,9 +1,10 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Brackets, EntityManager, Repository } from 'typeorm';
+
+import { Spell } from './entities/spell.entity';
 import { CreateSpellDto } from './dto/create-spell.dto';
 import { UpdateSpellDto } from './dto/update-spell.dto';
-import { Brackets, EntityManager, Repository } from 'typeorm';
-import { Spell } from './entities/spell.entity';
-import { InjectRepository } from '@nestjs/typeorm';
 import { FindSpellsDto } from './dto/find-spells.dto';
 
 @Injectable()
@@ -49,7 +50,7 @@ export class SpellsService {
   }
 
   async update(id: number, updateSpellDto: UpdateSpellDto) {
-    await this.spellsRepository.update({ id }, { ...updateSpellDto })
+    await this.spellsRepository.update({ id }, { ...updateSpellDto });
   }
 
   async remove(id: number) {
