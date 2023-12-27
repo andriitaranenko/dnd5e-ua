@@ -1,10 +1,10 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinTable, ManyToMany } from "typeorm";
+
+import { AbstractEntity } from "../../database/abstract.entity";
+import { Class } from "../../classes/entities/class.entity";
 
 @Entity()
-export class Spell {
-
-  @PrimaryGeneratedColumn()
-  id: number;
+export class Spell extends AbstractEntity<Spell> {
 
   @Column()
   originalName: string;
@@ -21,7 +21,19 @@ export class Spell {
   @Column({ type: 'longtext' })
   description: string;
 
-  constructor(spell: Partial<Spell>) {
-    Object.assign(this, spell);
-  }
+  @ManyToMany(() => Class, classEntity => classEntity.spells)
+  @JoinTable({
+    name: 'spell_class',
+    joinColumn: {
+      name: 'spell_id',
+      referencedColumnName: 'id',
+      foreignKeyConstraintName: 'spell_classes_class_spell_id'
+    },
+    inverseJoinColumn: {
+      name: 'class_id',
+      referencedColumnName: 'id',
+      foreignKeyConstraintName: 'spell_classes_class_class_id'
+    }
+  })
+  classes: Class[];
 }
