@@ -3,5 +3,7 @@ export class FindSpellsDto {
   translatedName?: string;
   level?: number;
 
+  classes?: string;
+
   search?: string;
 }
