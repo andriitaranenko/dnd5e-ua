@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@dnd-ua/shared-lib": ["shared-lib/src/index.ts"]
+      "@dnd-ua/shared-lib": ["shared-lib/src/index.ts"],
+      "@dnd-ua/ui": ["libs/client/ui/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
