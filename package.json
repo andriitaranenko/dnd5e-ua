@@ -4,7 +4,10 @@
   "license": "MIT",
   "scripts": {
     "start:server": "nx serve dnd-ua-api",
-    "start:client": "nx serve dnd-ua-client"
+    "start:client": "nx serve dnd-ua-client",
+    "docker-compose:up": "docker-compose -f dnd-ua-api/docker-compose.yaml up",
+    "docker-compose:down": "docker-compose -f dnd-ua-api/docker-compose.yaml down",
+    "seed": "npx ts-node --project ./tsconfig.demo.json dnd-ua-api/src/seed.ts"
   },
   "private": true,
   "devDependencies": {
@@ -69,11 +72,13 @@
     "@nestjs/typeorm": "^10.0.1",
     "axios": "^1.0.0",
     "dotenv": "^16.3.1",
+    "mysql": "npm:mysql2@^3.6.5",
     "mysql2": "^3.6.5",
     "reflect-metadata": "^0.1.13",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "typeorm": "^0.3.17",
+    "xlsx": "^0.18.5",
     "zone.js": "~0.14.0"
   }
 }
