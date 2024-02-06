@@ -1,1 +1,1 @@
-export * from './lib/ui/ui.component';
+export * from './lib/expandable-table/expandable-table.component';
