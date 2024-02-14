@@ -1,14 +1,17 @@
-import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { NxWelcomeComponent } from './nx-welcome.component';
+import { HttpClientModule } from "@angular/common/http";
+import { Component } from "@angular/core";
+
+import { SpellsModule } from "dnd-ua-client/src/app/spells/spells.module";
 
 @Component({
   standalone: true,
-  imports: [NxWelcomeComponent, RouterModule],
+  imports: [
+    SpellsModule,
+
+    HttpClientModule
+  ],
   selector: 'dnd-ua-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent {
-  title = 'dnd-ua-client';
-}
+export class AppComponent { }
