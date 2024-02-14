@@ -48,13 +48,13 @@ export class SpellsService {
 
     const query = { $and: [] };    
 
-    if (filterSpellDto.originalName && filterSpellDto.originalName.length > 2) {
+    if (filterSpellDto.originalName /* && filterSpellDto.originalName.length > 2 */) {
       query.$and.push({ 'originalName': { $regex: filterSpellDto.originalName, $options: 'i' } });
     }
-    if (filterSpellDto.translatedName && filterSpellDto.translatedName.length > 2) {
+    if (filterSpellDto.translatedName /* && filterSpellDto.translatedName.length > 2 */) {
       query.$and.push({ 'translatedName': { $regex: filterSpellDto.translatedName, $options: 'i' } });
     }
-    if (filterSpellDto.level) {      
+    if (filterSpellDto.level) {
       const levelArray = filterSpellDto.level.split(',').map(level => Number(level.trim())).filter(level => isNumber(level));
       query.$and.push({ 'level': { $in: levelArray } });
     }

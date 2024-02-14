@@ -26,7 +26,7 @@ export class SpellsController {
     if (filterSpellDto && Object.keys(filterSpellDto).length) {
       return this.spellsService.findSpellsByQuery(filterSpellDto);
     } else {
-      this.spellsService.findAllSpells();
+      return this.spellsService.findAllSpells();
     }
   }
 
