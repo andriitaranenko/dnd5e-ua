@@ -13,51 +13,15 @@ import { Utils } from "dnd-ua-client/src/app/shared/_utils/utils.class";
   template: `
     <div class="filters">
       <form [formGroup]="formGroup">
-        <mat-form-field class="example-form-field">
-          <mat-label>Clearable input</mat-label>
-          <input matInput type="text" formControlName="originalName">
 
-          <ng-container *ngIf="true">
-            <button matSuffix mat-icon-button aria-label="Clear" (click)="resetControl('originalName')">
-              <mat-icon>close</mat-icon>
-            </button>
-          </ng-container>
-            
-        </mat-form-field>
+        <dnd-ua-input label="original name" formControlName="originalName"></dnd-ua-input>
 
-        <mat-form-field class="example-form-field">
-          <mat-label>Clearable input</mat-label>
-          <input matInput type="text" formControlName="translatedName">
+        <dnd-ua-input label="translated name" formControlName="translatedName"></dnd-ua-input>
 
-          <ng-container *ngIf="true">
-            <button matSuffix mat-icon-button aria-label="Clear" (click)="resetControl('translatedName')">
-              <mat-icon>close</mat-icon>
-            </button>
-          </ng-container>
-            
-          
-        </mat-form-field>
+        <dnd-ua-select label="levels" [options]="levels" formControlName="level"></dnd-ua-select>
 
-        <mat-form-field>
-          <mat-label>Levels</mat-label>
-          <mat-select formControlName="level" multiple>
+        <dnd-ua-select label="classes" [options]="classes" formControlName="spellUser"></dnd-ua-select>
 
-          <ng-container *ngFor="let level of levels">
-            <mat-option [value]="level.value">{{level.value}}</mat-option>
-          </ng-container>
-            
-          </mat-select>
-        </mat-form-field>
-
-        <mat-form-field>
-          <mat-label>Classes</mat-label>
-          <mat-select formControlName="spellUser" multiple>
-
-          <ng-container *ngFor="let class of classes">
-            <mat-option [value]="class.value">{{class.value}}</mat-option>
-          </ng-container>
-          </mat-select>
-        </mat-form-field>
       </form>
     </div>
 
@@ -138,6 +102,8 @@ export class SpellListComponent implements OnInit, OnDestroy {
         startWith({}),
         debounceTime(300),
         switchMap((updatedValue) => {
+          console.log(updatedValue);
+          
           const filterdProperties = Utils.removeEmpty(updatedValue);          
           return this.getSpells(filterdProperties);
         })
