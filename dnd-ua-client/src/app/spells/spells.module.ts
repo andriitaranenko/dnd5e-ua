@@ -8,6 +8,8 @@ import { MatInputModule } from "@angular/material/input";
 import { MatSelectModule } from "@angular/material/select";
 
 import { ExpandableTable } from "dnd-ua-client/src/app/shared/_components/expandable-table/expandable-table.component";
+import { InputComponent } from "dnd-ua-client/src/app/shared/_components/input/input.component";
+import { SelectComponent } from "dnd-ua-client/src/app/shared/_components/select/select.component";
 import { SpellDetailComponent } from "dnd-ua-client/src/app/spells/_components/spell-detail/spell-detail.component";
 import { SpellListComponent } from "dnd-ua-client/src/app/spells/_components/spell-list/spell-list.component";
 import { SpellComponent } from "dnd-ua-client/src/app/spells/_components/spell/spell.component";
@@ -35,6 +37,8 @@ const components = [
     ReactiveFormsModule,
 
     ExpandableTable,
+    InputComponent,
+    SelectComponent,
 
     ...materialImports
   ],

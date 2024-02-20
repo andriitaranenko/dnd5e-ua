@@ -13,10 +13,10 @@ export class GenericTableComponent<T> {
   @Input() dataSource: T[] = [];
 
   get columnDefinitions(): string[] {
-    return this.tableDefinition.columnDefinitions.map(columnDefinition => columnDefinition.definition);
+    return this.tableDefinition.columnDefinitions.filter(columnDefinition => columnDefinition.showColumn !== false).map(columnDefinition => columnDefinition.definition);
   }
 
   get columnHeadings(): string[] {
-    return this.tableDefinition.columnDefinitions.map(columnDefinition => columnDefinition.header);
+    return this.tableDefinition.columnDefinitions.filter(columnDefinition => columnDefinition.showColumn).map(columnDefinition => columnDefinition.header);
   }
 }

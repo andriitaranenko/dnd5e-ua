@@ -8,7 +8,8 @@ export class ColumnDefinition<T> {
   constructor(
     public definition: string,
     public header: string,
-    public data: (model: T) => string
+    public data: (model: T) => string,
+    public showColumn: boolean
   ) { }
 }
 
