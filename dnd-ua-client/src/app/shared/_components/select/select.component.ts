@@ -10,7 +10,7 @@ import { MatSelectModule } from "@angular/material/select";
 @Component({
   selector: 'dnd-ua-select',
   template: `
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" class="form-field">
       <mat-label>{{ label }}</mat-label>
 
       <mat-select multiple [(ngModel)]="value" (selectionChange)="onSelectionChange(value)">

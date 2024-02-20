@@ -1,0 +1,20 @@
+<h2>Spells</h2>
+
+<form [formGroup]="formGroup">
+
+  <dnd-ua-input label="original name" formControlName="originalName"></dnd-ua-input>
+
+  <dnd-ua-input label="translated name" formControlName="translatedName"></dnd-ua-input>
+
+  <dnd-ua-select label="levels" [options]="levels" formControlName="level"></dnd-ua-select>
+
+  <dnd-ua-select label="classes" [options]="classes" formControlName="spellUser"></dnd-ua-select>
+
+</form>
+
+<dnd-ua-expandable-table
+  class="table"
+  [tableDefinition]="tableDefinition"
+  [dataSource]="(dataSource$ | async)!"
+  [expandableSectionConfig]="expandableSectionConfig"
+></dnd-ua-expandable-table>

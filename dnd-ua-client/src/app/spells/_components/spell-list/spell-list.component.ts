@@ -10,27 +10,8 @@ import { Utils } from "dnd-ua-client/src/app/shared/_utils/utils.class";
 
 @Component({
   selector: 'dnd-ua-spell-list',
-  template: `
-    <div class="filters">
-      <form [formGroup]="formGroup">
-
-        <dnd-ua-input label="original name" formControlName="originalName"></dnd-ua-input>
-
-        <dnd-ua-input label="translated name" formControlName="translatedName"></dnd-ua-input>
-
-        <dnd-ua-select label="levels" [options]="levels" formControlName="level"></dnd-ua-select>
-
-        <dnd-ua-select label="classes" [options]="classes" formControlName="spellUser"></dnd-ua-select>
-
-      </form>
-    </div>
-
-    <dnd-ua-expandable-table
-      [tableDefinition]="tableDefinition"
-      [dataSource]="(dataSource$ | async)!"
-      [expandableSectionConfig]="expandableSectionConfig"
-    ></dnd-ua-expandable-table>
-  `
+  templateUrl: './spell-list.component.html',
+  styleUrls: ['./spell-list.component.scss']
 })
 export class SpellListComponent implements OnInit, OnDestroy {
   
@@ -65,16 +46,16 @@ export class SpellListComponent implements OnInit, OnDestroy {
   ];
   
   readonly tableDefinition = new TableDefinition([
-    new ColumnDefinition('originalName', 'Original Name', (model: Spell) => model.originalName),
-    new ColumnDefinition('sourceUrl', 'Resource Url', (model: Spell) => model.sourceUrl),
-    new ColumnDefinition('translatedName', 'Translated Name', (model: Spell) => model.translatedName),
-    new ColumnDefinition('level', 'Level', (model: Spell) => String(model.level)),
-    new ColumnDefinition('castingTime', 'Casting Time', (model: Spell) => model.castingTime),
-    new ColumnDefinition('range', 'Range', (model: Spell) => String(model.range)),
-    new ColumnDefinition('components', 'Components', (model: Spell) => model.components.join(', ')),
-    new ColumnDefinition('duration', 'Duration', (model: Spell) => String(model.duration) + ' minutes'),
-    // new ColumnDefinition('description', 'Description', (model: Spell) => model.description),
-    new ColumnDefinition('spellUsers', 'Spell Users', (model: Spell) => model.spellUsers.join(', ')),
+    new ColumnDefinition('originalName', 'Original Name', (model: Spell) => model.originalName, true),
+    new ColumnDefinition('sourceUrl', 'Resource Url', (model: Spell) => model.sourceUrl, !Utils.isMobileDevice()),
+    new ColumnDefinition('translatedName', 'Translated Name', (model: Spell) => model.translatedName, true),
+    new ColumnDefinition('level', 'Level', (model: Spell) => String(model.level), !Utils.isMobileDevice()),
+    new ColumnDefinition('castingTime', 'Casting Time', (model: Spell) => model.castingTime, !Utils.isMobileDevice()),
+    new ColumnDefinition('range', 'Range', (model: Spell) => String(model.range), !Utils.isMobileDevice()),
+    new ColumnDefinition('components', 'Components', (model: Spell) => model.components.join(', '), !Utils.isMobileDevice()),
+    new ColumnDefinition('duration', 'Duration', (model: Spell) => String(model.duration) + ' minutes', !Utils.isMobileDevice()),
+    // new ColumnDefinition('description', 'Description', (model: Spell) => model.description, !Utils.isMobileDevice()),
+    new ColumnDefinition('spellUsers', 'Spell Users', (model: Spell) => model.spellUsers.join(', '), !Utils.isMobileDevice()),
   ]);
 
   readonly expandableSectionConfig: ExpandableSectionConfig = {

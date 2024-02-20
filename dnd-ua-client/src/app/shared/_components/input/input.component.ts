@@ -10,19 +10,15 @@ import { MatInputModule } from "@angular/material/input";
 @Component({
   selector: 'dnd-ua-input',
   template: `
-    <mat-form-field appearance="outline">
-      <div class="form-field">
-        <mat-label *ngIf="label">{{ label }}</mat-label>
-        <input matInput type="text" [(ngModel)]="value" (input)="onChange(value)">
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>{{ label }}</mat-label>
+      <input matInput type="text" placeholder="Placeholder" [(ngModel)]="value" (input)="onChange(value)">
 
-        <!-- <ng-container *ngIf="true">
-          <button matSuffix mat-icon-button aria-label="Clear" (click)="resetControl()">
-            <mat-icon>close</mat-icon>
-          </button>
-        </ng-container> -->
-      </div>
-      
-        
+      @if (value) {
+        <button matSuffix mat-icon-button aria-label="Clear" (click)="resetControl()">
+          <mat-icon>close</mat-icon>
+        </button>
+      }
     </mat-form-field>
   `,
   styleUrls: ['./input.component.scss'],
