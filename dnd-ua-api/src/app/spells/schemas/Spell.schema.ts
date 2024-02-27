@@ -17,6 +17,9 @@ export class Spell {
   
   @Prop()
   castingTime: string;
+
+  @Prop()
+  concentration: boolean;
   
   @Prop()
   range: number;
