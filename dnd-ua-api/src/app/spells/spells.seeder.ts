@@ -72,7 +72,7 @@ export class SpellsSeeder implements Seeder {
         castingTime: spell[SpellTableTranslationKeys.CASTING_TIME],
         range: parseInt(spell[SpellTableTranslationKeys.RANGE]),
         components: (spell[SpellTableTranslationKeys.COMPONENTS] as string).split(',').map(e => e.trim()),
-        duration: this.parseSpellDuration(spell[SpellTableTranslationKeys.DURATION]),
+        duration: spell[SpellTableTranslationKeys.DURATION],
         description: spell[SpellTableTranslationKeys.DESCRIPTION],
         spellUsers: (spell[SpellTableTranslationKeys.CLASSES] as string).split(',').map(e => e.trim())
       });
@@ -97,9 +97,9 @@ export class SpellsSeeder implements Seeder {
     return parseInt(spell);
   }
 
-  private parseSpellDuration(spell: string): number {
-    if (spell === 'Миттєво') return 0;
+  // private parseSpellDuration(spell: string): number {
+  //   if (spell === 'Миттєво') return 0;
 
-    return parseInt(spell);
-  }
+  //   return parseInt(spell);
+  // }
 }

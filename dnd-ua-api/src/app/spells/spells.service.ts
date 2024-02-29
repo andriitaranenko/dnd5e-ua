@@ -59,7 +59,7 @@ export class SpellsService {
       query.$and.push({ 'level': { $in: levelArray } });
     }
     if (filterSpellDto.spellUser) {
-      const spellUserArray = filterSpellDto.spellUser.split(',').map(spellUser => String(spellUser.trim())).filter(spellUser => isString(spellUser));      
+      const spellUserArray = filterSpellDto.spellUser.map(spellUser => String(spellUser.trim())).filter(spellUser => isString(spellUser));      
       query.$and.push({ 'spellUsers': { $in: spellUserArray } });
     }
 

@@ -1,4 +1,5 @@
-import { IsArray, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { SpellComponents, SpellUser, AreaType, AbilityScore, SaveSuccessEffect, DamageType, SpellCastingTime } from '@dnd-ua/shared-lib';
+import { IsArray, IsBoolean, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class CreateSpellDto {
   @IsNotEmpty()
@@ -16,18 +17,42 @@ export class CreateSpellDto {
   @IsNotEmpty()
   @IsNumber()
   level: number;
+
+  @IsNotEmpty()
+  @IsBoolean()
+  concentration: boolean;
+
+  @IsNotEmpty()
+  @IsBoolean()
+  ritual: boolean;
+
+  @IsOptional()
+  @IsString()
+  effect?: string;
   
   @IsNotEmpty()
-  @IsString()
-  castingTime: string;
+  @IsEnum(SpellCastingTime)
+  castingTime: SpellCastingTime;
   
   @IsNotEmpty()
   @IsNumber()
   range: number;
-  
+    
+  @IsOptional()
+  @IsNumber()
+  area?: number;
+
+  @IsOptional()
+  @IsEnum(AreaType)
+  areaType?: AreaType;
+
   @IsNotEmpty()
-  @IsArray()
-  components: string[];
+  @IsEnum(SpellComponents)
+  components: SpellComponents[];
+
+  @IsOptional()
+  @IsString()
+  materials?: string;
   
   @IsNotEmpty()
   @IsNumber()
@@ -37,7 +62,39 @@ export class CreateSpellDto {
   @IsString()
   description: string;
   
+  @IsOptional()
+  @IsString()
+  higherLevel?: string;
+
   @IsNotEmpty()
   @IsArray()
-  spellUsers: string[];
+  spellUsers: SpellUser[];
+  
+  @IsNotEmpty()
+  @IsEnum(AbilityScore)
+  saveType?: AbilityScore;
+
+  @IsNotEmpty()
+  @IsEnum(SaveSuccessEffect)
+  saveSuccess?: SaveSuccessEffect;
+
+  @IsNotEmpty()
+  @IsEnum(DamageType)
+  damageType?: DamageType;
+
+  @IsOptional()
+  @IsString()
+  damageHP?: string; // e.g. 1d6
+
+  @IsOptional()
+  @IsString()
+  damageLevelModifier?: string;
+
+  @IsOptional()
+  @IsString()
+  healHP?: string;
+
+  @IsOptional()
+  @IsString()
+  healLevelModifier?: string;
 }

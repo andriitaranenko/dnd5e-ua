@@ -1,4 +1,5 @@
-import { IsOptional, IsString } from "class-validator";
+import { SpellUser } from "@dnd-ua/shared-lib";
+import { IsEnum, IsOptional, IsString } from "class-validator";
 
 export class FilterSpellDto {
 
@@ -15,6 +16,6 @@ export class FilterSpellDto {
   level?: string;
 
   @IsOptional()
-  @IsString()
-  spellUser?: string;
+  @IsEnum(SpellUser)
+  spellUser?: SpellUser[];
 }
