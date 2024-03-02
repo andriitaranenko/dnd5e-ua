@@ -8,7 +8,6 @@ import { AuthenticationService } from 'dnd-ua-api/src/app/auth/authentication.se
 import { LocalStrategy } from 'dnd-ua-api/src/app/auth/strategies/local.auth';
 import { UsersModule } from 'dnd-ua-api/src/app/users/users.module';
 import { User, UserSchema } from 'dnd-ua-api/src/app/users/schemas/User.schema';
-import { UsersService } from 'dnd-ua-api/src/app/users/users.service';
 import { JwtStrategy } from 'dnd-ua-api/src/app/auth/strategies/jwt.auth';
 import { RefreshJwtStrategy } from 'dnd-ua-api/src/app/auth/strategies/refresh-token.strategy';
 
@@ -26,8 +25,9 @@ import { RefreshJwtStrategy } from 'dnd-ua-api/src/app/auth/strategies/refresh-t
         schema: UserSchema,
       },
     ]),
+    UsersModule,
   ],
-  providers: [AuthenticationService, UsersService, LocalStrategy, JwtStrategy, RefreshJwtStrategy],
+  providers: [AuthenticationService, LocalStrategy, JwtStrategy, RefreshJwtStrategy],
   controllers: [AuthController],
 })
 export class AuthModule {}

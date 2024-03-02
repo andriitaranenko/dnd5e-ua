@@ -9,5 +9,6 @@ import { UsersService } from 'dnd-ua-api/src/app/users/users.service';
   imports: [MongooseModule.forFeature([{ name: User.name, schema: UserSchema }])],
   providers: [UsersService],
   controllers: [UsersController],
+  exports: [UsersService]
 })
 export class UsersModule {}

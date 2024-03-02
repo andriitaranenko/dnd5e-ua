@@ -3,7 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import { compare } from 'bcrypt';
 
 import { UsersService } from 'dnd-ua-api/src/app/users/users.service';
-import { User } from 'dnd-ua-api/src/app/users/schemas/User.schema';
+import { User, UserDocument } from 'dnd-ua-api/src/app/users/schemas/User.schema';
 import { CreateUserDto } from 'dnd-ua-api/src/app/users/dto/create-user.dto';
 import { CustomJwt } from 'dnd-ua-api/src/app/auth/models/auth.model';
 
@@ -24,8 +24,9 @@ export class AuthenticationService {
     return user;
   }
 
-  async login(user: User): Promise<CustomJwt> {
+  async login(user: UserDocument): Promise<CustomJwt> {
     const payload = {
+      id: user.id,
       username: user.username,
     };
 
