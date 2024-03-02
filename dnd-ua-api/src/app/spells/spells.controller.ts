@@ -1,10 +1,11 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query, HttpException, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, HttpException, HttpStatus, UseGuards } from '@nestjs/common';
 import mongoose from 'mongoose';
 
 import { SpellsService } from 'dnd-ua-api/src/app/spells/spells.service';
 import { CreateSpellDto } from 'dnd-ua-api/src/app/spells/dto/create-spell.dto';
 import { UpdateSpellDto } from 'dnd-ua-api/src/app/spells/dto/update-spell.dto';
 import { FilterSpellDto } from 'dnd-ua-api/src/app/spells/dto/filter-spell.dto';
+import { JwtGuard } from 'dnd-ua-api/src/app/auth/guards/jwt.guard';
 
 @Controller('spells')
 export class SpellsController {
@@ -21,6 +22,7 @@ export class SpellsController {
     return this.spellsService.createSpell(createSpellDto);
   }
 
+  @UseGuards(JwtGuard)
   @Get()
   findSpells(@Query() filterSpellDto?: FilterSpellDto) {
     if (filterSpellDto && Object.keys(filterSpellDto).length) {
