@@ -16,6 +16,7 @@ import { UsersModule } from 'dnd-ua-api/src/app/users/users.module';
   ],
   controllers: [SpellsController],
   providers: [SpellsService, SpellMigrationService],
+  exports: [SpellsService]
 })
 export class SpellsModule implements OnModuleInit {
   constructor(private spellMigrationService: SpellMigrationService) {}

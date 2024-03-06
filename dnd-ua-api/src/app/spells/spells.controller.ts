@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query, HttpException, HttpStatus, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, HttpException, HttpStatus, UseGuards, Request } from '@nestjs/common';
 import mongoose from 'mongoose';
 
 import { SpellsService } from 'dnd-ua-api/src/app/spells/spells.service';
@@ -7,6 +7,7 @@ import { UpdateSpellDto } from 'dnd-ua-api/src/app/spells/dto/update-spell.dto';
 import { FilterSpellDto } from 'dnd-ua-api/src/app/spells/dto/filter-spell.dto';
 import { ApiBody, ApiCreatedResponse, ApiNotFoundResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Spell } from 'dnd-ua-api/src/app/spells/schemas/Spell.schema';
+import { JwtGuard } from 'dnd-ua-api/src/app/auth/guards/jwt.guard';
 
 @ApiTags('Spells')
 @Controller('spells')
@@ -59,7 +60,7 @@ export class SpellsController {
     description: 'Spell was not Found',
   })
   @Get(':id')
-  async findSpellById(@Param('id') id: string): Promise<Spell> {    
+  async findSpellById(@Param('id') id: string): Promise<Spell> {
     const isValid = mongoose.Types.ObjectId.isValid(id);
     if (!isValid) throw new HttpException('Spell not found', HttpStatus.NOT_FOUND);
     const findSpell = await this.spellsService.findSpellById(id);
