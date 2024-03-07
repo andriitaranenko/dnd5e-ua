@@ -52,7 +52,27 @@
           "vendorChunk": true,
           "extractLicenses": false,
           "sourceMap": true,
-          "namedChunks": true
+          "namedChunks": true,
+          "fileReplacements": [
+            {
+              "replace": "dnd-ua-client/src/environments/environment.ts",
+              "with": "dnd-ua-client/src/environments/environment.development.ts"
+            }
+          ]
+        },
+        "hosting": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true,
+          "fileReplacements": [
+            {
+              "replace": "dnd-ua-client/src/environments/environment.ts",
+              "with": "dnd-ua-client/src/environments/environment.hosting.ts"
+            }
+          ]
         }
       },
       "defaultConfiguration": "production"
@@ -65,6 +85,10 @@
         },
         "development": {
           "buildTarget": "dnd-ua-client:build:development"
+          
+        },
+        "hosting": {
+          "buildTarget": "dnd-ua-client:build:hosting"
         }
       },
       "defaultConfiguration": "development"

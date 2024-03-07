@@ -1,5 +1,6 @@
 import { HttpClientModule } from "@angular/common/http";
 import { Component } from "@angular/core";
+import { RouterModule } from "@angular/router";
 
 import { SpellsModule } from "dnd-ua-client/src/app/spells/spells.module";
 
@@ -8,7 +9,8 @@ import { SpellsModule } from "dnd-ua-client/src/app/spells/spells.module";
   imports: [
     SpellsModule,
 
-    HttpClientModule
+    HttpClientModule,
+    RouterModule
   ],
   selector: 'dnd-ua-root',
   templateUrl: './app.component.html',

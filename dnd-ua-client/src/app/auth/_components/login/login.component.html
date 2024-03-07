@@ -1,0 +1,17 @@
+<h2 class="text-center">Login</h2>
+
+<form [formGroup]="loginForm">
+  <dnd-ua-input label="Username" formControlName="username"></dnd-ua-input>
+
+  @if (username.dirty && username.invalid) {
+    <mat-error>Username is required</mat-error>
+  }
+  <dnd-ua-input label="Password" formControlName="password" type="password"></dnd-ua-input>
+  @if (password.dirty && password.invalid) {
+    <mat-error>Password is required</mat-error>
+  }
+
+  <button mat-raised-button color="primary" (click)="login()">Login</button>
+</form>
+
+<p class="text-center">Don't have an account? <a routerLink="../register">Register</a>.</p>
