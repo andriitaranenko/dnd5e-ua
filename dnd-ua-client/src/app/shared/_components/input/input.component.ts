@@ -12,9 +12,16 @@ import { MatInputModule } from "@angular/material/input";
   template: `
     <mat-form-field appearance="outline" class="form-field">
       <mat-label>{{ label }}</mat-label>
-      <input matInput type="text" placeholder="Placeholder" [(ngModel)]="value" (input)="onChange(value)">
 
-      @if (value) {
+      @if (type === 'text') {
+        <input matInput type="text" placeholder="Placeholder" [(ngModel)]="value" (input)="onChange(value)">
+      }
+
+      @if (type === 'password') {
+        <input matInput type="password" placeholder="Placeholder" [(ngModel)]="value" (input)="onChange(value)">
+      }
+
+      @if (hasClearButton && value) {
         <button matSuffix mat-icon-button aria-label="Clear" (click)="resetControl()">
           <mat-icon>close</mat-icon>
         </button>
@@ -37,6 +44,10 @@ export class InputComponent implements ControlValueAccessor {
   @Input() label!: string;
 
   @Input() disabled: boolean = false;
+
+  @Input() type: 'text' | 'password' = 'text';
+
+  @Input() hasClearButton: boolean = false
 
   value: any;
 
