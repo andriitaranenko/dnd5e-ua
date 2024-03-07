@@ -5,6 +5,7 @@
   "scripts": {
     "start:server": "nx serve dnd-ua-api",
     "start:client": "nx serve dnd-ua-client",
+    "host:client": "nx serve dnd-ua-client",
     "seed": "nx build dnd-ua-api && node dist/dnd-ua-api/seed.js",
     "seed:refresh": "node dist/dnd-ua-api/seed.js --refresh"
   },
