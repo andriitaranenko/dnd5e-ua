@@ -5,7 +5,7 @@ import { compare } from 'bcrypt';
 import { UsersService } from 'dnd-ua-api/src/app/users/users.service';
 import { User, UserDocument } from 'dnd-ua-api/src/app/users/schemas/User.schema';
 import { CreateUserDto } from 'dnd-ua-api/src/app/users/dto/create-user.dto';
-import { CustomJwt } from 'dnd-ua-api/src/app/auth/models/auth.model';
+import { CustomJwt } from '@dnd-ua/shared-lib';
 
 @Injectable()
 export class AuthenticationService {
@@ -31,7 +31,6 @@ export class AuthenticationService {
     };
 
     return {
-      ...user,
       accessToken: this.jwtService.sign(payload),
       refreshToken: this.jwtService.sign(payload, { expiresIn: '7d' }),
     };
