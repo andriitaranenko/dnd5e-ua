@@ -1,8 +1,9 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import mongoose, { Document } from 'mongoose';
 import { hash } from 'bcrypt';
 
 import { Roles } from 'dnd-ua-api/src/app/auth/models/auth.model';
+import { Character } from 'dnd-ua-api/src/app/characters/schemas/Character.schema';
 
 export type UserDocument = User & Document;
 
@@ -16,6 +17,9 @@ export class User {
 
   @Prop({ type: String, enum: Roles, isRequired: false, default: Roles.USER })
   role?: Roles;
+
+  @Prop({ type: [mongoose.Schema.Types.ObjectId], ref: 'Character', default: [] })
+  characters: Character[];
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
